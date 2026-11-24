@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vector — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a young builder's showcase — confident, concrete, a little playful.
+   IDEA: a voxel game world, the thing he actually builds; the page is a level select.
+   PICTURE: an isometric block scene — tree, lumber stack, saw truck — drawn in SVG.
+   COLOUR and TYPE: deep pine ground, sawdust light, saw-red accent; Rubik throughout.
+   LAYOUT: poster hero, then project "levels", devlogs, community, skills, contact. */
+:root{color-scheme:light dark;
+--bg:light-dark(#f6f4ee,#15120e);--band:light-dark(#ffffff,#211b14);--ink:light-dark(#1d1812,#f6efe4);
+--soft:light-dark(#5e5447,#c2b6a5);--line:light-dark(#e2d9ca,#3b3127);--red:#ff7a1a;--pine:#15120e;--saw:#f2c14e}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Rubik,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(36px,5vw,72px) max(5vw,16px)}
+nav{position:sticky;top:0;z-index:5;background:var(--pine);color:#f6efe4}
+nav .wrap{display:flex;align-items:center;gap:20px;padding:12px max(5vw,16px);flex-wrap:wrap}
+nav b{font-weight:800;font-size:18px;margin-right:auto;display:flex;align-items:center;gap:10px}.brand img{width:36px;height:36px;border-radius:50%}
+nav a{text-decoration:none;font-size:15px;opacity:.85;padding:10px 0}
+nav a:hover,nav a:focus-visible{opacity:1;text-decoration:underline}
+.hero{background:var(--pine);color:#f6efe4}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:center}
+h1{font-size:clamp(40px,7vw,76px);line-height:1;margin:0 0 16px;font-weight:800;text-wrap:balance}
+h2{font-size:clamp(30px,4vw,44px);line-height:1.05;margin:0 0 10px;font-weight:800;text-wrap:balance}
+h3{font-size:22px;line-height:1.2;margin:0 0 6px;font-weight:700}
+.lead{font-size:19px;max-width:34em;color:#e3d8c8;margin:0 0 24px}
+.sub{color:var(--soft);max-width:40em;margin:0 0 32px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid #f6efe4}
+.btn.p{background:var(--red);border-color:var(--red);color:#fff}
+.btn:focus-visible,nav a:focus-visible{outline:3px solid var(--saw);outline-offset:3px}
+.stats{display:flex;gap:28px;flex-wrap:wrap;margin-top:32px}
+.stats div{font-size:14px;color:#c2b6a5}.stats strong{display:block;font-size:30px;color:#fff;line-height:1.1}
+.pic{position:relative}
+.pic{margin:0}.pic img{width:100%;height:auto;display:block;border-radius:16px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.stack2{position:relative;padding:0 0 34px 0}.pic .icon{position:absolute;left:-14px;bottom:0;width:clamp(96px,24%,150px);border:4px solid var(--pine);border-radius:22px}
+.pic figcaption{font-size:14px;color:#c2b6a5;margin-top:10px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;margin:8px 0 4px}
+.shots figure{margin:0}.shots img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)}
+.shots figcaption{font-size:14px;color:var(--soft);margin-top:6px}
+.shots .wide{grid-column:1/-1}
+.logo{width:72px;height:72px;border-radius:14px;object-fit:cover;border:1px solid var(--line)}
+.grp{display:flex;gap:16px;align-items:center}
+.play{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:10px;background:var(--red);color:#fff;font-weight:700;text-decoration:none}.play:focus-visible{outline:3px solid var(--saw);outline-offset:3px}
+.shotone{margin:6px 0 0}.shotone img{width:100%;height:auto;display:block;border-radius:12px}.shotone figcaption{font-size:14px;color:var(--soft);margin-top:6px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:20px}
+.card{background:var(--band);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:10px}
+.tag{font-size:13px;color:var(--soft)}
+.feat{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+.card ul{margin:0;padding-left:20px}.card li{margin:4px 0}
+.fix{border-left:4px solid var(--red);padding:2px 0 2px 14px;margin:10px 0}
+.fix b{display:block}
+.fix p{margin:2px 0;color:var(--soft);font-size:15px}
+.big{font-size:34px;font-weight:800;line-height:1.1}
+.row{display:flex;gap:28px;flex-wrap:wrap}
+.pills{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.pills.learning li{opacity:.8}
+.pills li{background:var(--band);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:15px}
+.alt{background:var(--band)}
+.alt .card{background:var(--bg)}
+footer{background:var(--pine);color:#e3d8c8}
+footer h2{color:#fff}
+.note{font-size:13px;color:var(--soft)}
+
+.orbit-band{background:linear-gradient(#15120e,#0d0b08);color:#f6efe4}
+.orbit-band .sub{color:#c2b6a5}
+.ow{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center}
+.stage{position:relative;height:clamp(280px,46vw,480px)}
+.ring{position:absolute;left:50%;top:50%;border:2px dashed rgba(242,193,78,.35);border-radius:50%;transform:translate(-50%,-50%)}
+.core{position:absolute;left:50%;top:50%;width:clamp(110px,16vw,160px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;box-shadow:0 0 0 6px rgba(242,193,78,.25),0 0 60px rgba(242,193,78,.45);z-index:50}
+.core img{width:100%;height:100%;object-fit:cover;display:block}
+.gi{position:absolute;left:0;top:0;width:clamp(48px,7.5vw,76px);aspect-ratio:1;padding:0;border:3px solid #f6efe4;border-radius:18px;overflow:hidden;cursor:pointer;background:#211b14;transition:border-color .2s,box-shadow .2s}
+.gi img{width:100%;height:100%;object-fit:cover;display:block}
+.gi:hover,.gi:focus-visible{border-color:var(--saw);box-shadow:0 0 24px rgba(242,193,78,.6);outline:none}
+.gi.on{border-color:var(--red);box-shadow:0 0 0 4px rgba(255,122,26,.35)}
+.panel{background:#211b14;border:1px solid #3b3127;border-radius:18px;padding:24px;min-height:300px}
+.panel .ph{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.panel .ph img{width:64px;height:64px;border-radius:14px;object-fit:cover}
+.panel h3{margin:0;color:#fff}
+.status{font-size:13px;color:#c2b6a5}
+.pstats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:14px 0}
+.pstats div{background:#15120e;border-radius:12px;padding:10px 12px;font-size:13px;color:#c2b6a5}
+.pstats strong{display:block;font-size:24px;color:#fff;line-height:1.15}
+.lesson{border-left:4px solid var(--saw);padding:4px 0 4px 14px}
+.lesson b{color:var(--saw);font-size:14px}
+.lesson p{margin:4px 0 0}
+.hint{font-size:14px;color:#c2b6a5;text-align:center;margin:8px 0 0}
+.gi{overflow:visible}.gi img{border-radius:15px}
+.dot{position:absolute;right:-5px;top:-5px;width:16px;height:16px;border-radius:50%;border:3px solid #15120e}
+.badge{display:inline-block;font-size:13px;font-weight:700;color:var(--c);border:1.5px solid var(--c);border-radius:999px;padding:1px 10px;margin-bottom:4px}
+.legend{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;padding:0;margin:10px 0 0;font-size:14px;color:#c2b6a5}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+@media(max-width:860px){.ow{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:860px){.hero .wrap,.feat{grid-template-columns:minmax(0,1fr)}.pic{max-width:520px}}
+@media(max-width:600px){nav a{font-size:14px}nav .wrap{gap:14px}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><b class="brand"><img src="img/vector-logo.webp" width="240" height="240" alt="">Vector</b><a href="#orbit">Orbit</a><a href="#games">Games</a><a href="#devlogs">Devlogs</a><a href="#hardware">Hardware</a><a href="#contact">Contact</a></div></nav>
+
+<header class="hero band"><div class="wrap">
+  <div>
+    <h1>Vector</h1>
+    <p class="lead">Roblox game developer and builder. I make multiplayer games in Luau and post devlogs about how they work.</p>
+    <div class="btns">
+      <a class="btn p" href="#games">See my games</a>
+      <a class="btn" href="https://www.youtube.com/@timedVector">YouTube @timedVector</a>
+    </div>
+    <div class="stats">
+      <div><strong>970k+</strong>game visits</div>
+      <div><strong>100k+</strong>favourites</div>
+      <div><strong>110k+</strong>group members</div>
+      <div><strong>1,300+</strong>subscribers</div>
+    </div>
+  </div>
+  <figure class="pic"><div class="stack2"><img src="img/batc-thumb.webp" width="768" height="432" alt="Build a Tree Cutter ad thumbnail: a glowing drill tank assembled from parts"><img class="icon" src="img/batc-icon.webp" width="240" height="240" alt="Build a Tree Cutter game icon: a saw tank cutting a golden tree"></div><figcaption>Build a Tree Cutter: game icon and my best-performing ad thumbnail (+3% CTR)</figcaption></figure>
+</div></header>
+
+
+<section class="band orbit-band" id="orbit"><div class="wrap">
+  <h2>Every game I've made</h2>
+  <p class="sub">Eleven games since 2020. Most of them failed, and I learned a lot from every one.</p>
+  <div class="ow">
+    <div>
+      <div class="stage" id="stage">
+        <div class="ring" id="ring"></div>
+        <div class="core"><img src="img/vector-logo.webp" width="240" height="240" alt="Vector's lizard logo"></div>
+      </div>
+      <p class="hint">Tap or click a game. The orbit pauses while you explore.</p>
+      <ul class="legend"><li><i style="background:#5fd16b"></i>Live</li><li><i style="background:#f2c14e"></i>Hit</li><li><i style="background:#ff9a3d"></i>Cut early</li><li><i style="background:#ff6b5e"></i>Flop</li><li><i style="background:#8fb3d9"></i>Learning project</li><li><i style="background:#c39bff"></i>Event hub</li></ul>
+    </div>
+    <div class="panel" id="panel" aria-live="polite"></div>
+  </div>
+</div></section>
+
+<section class="band" id="games"><div class="wrap">
+  <h2>Games</h2>
+  <p class="sub">Games I've built and launched on Roblox.</p>
+  <div class="grid">
+    <article class="card feat">
+      <div>
+        <span class="tag">Just launched · Roblox · Luau</span>
+        <div class="grp"><img class="logo" src="img/batc-icon.webp" width="240" height="240" alt="Build a Tree Cutter game icon"><h3>Build a Tree Cutter</h3></div>
+        <p>My newest game, live on Roblox and growing. Players build their own vehicles, bolt saws onto them, drive into the forest, cut trees and sell the lumber to upgrade. I designed it as a modular, server-authoritative codebase: separate modules for vehicles, harvesting, plots and player data, with ProfileStore saving each player's builds.</p>
+        <ul>
+          <li>Build mode: place engines, saws, wheels and storage on your plot</li>
+          <li>A garden where planted trees earn money over time</li>
+          <li>Leaderboards and scheduled live events</li>
+          <li>Player-built vehicles made from welded parts</li>
+          <li>Seeded tree spawning that runs the same on server and client</li>
+          <li>Storage and selling loop tied to drive zones</li>
+        </ul>
+        <p><a class="play" href="https://www.roblox.com/games/92131967734544/Build-a-Tree-Cutter">Play on Roblox</a></p>
+      </div>
+      <div>
+        <h3>Problems I solved</h3>
+        <div class="fix"><b>Big vehicles wouldn't drive</b><p>Creating 50+ welds at once overloaded Roblox physics, and the client was simulating before the server finished. I set network ownership first and created welds in batches, so builds of every size now drive.</p></div>
+        <div class="fix"><b>"Ghost" trees you couldn't cut</b><p>Once storage filled up, the client marked trees as cut before the server confirmed. I switched that flag to a short timeout, so denied cuts can be retried.</p></div>
+        <div class="fix"><b>Trees spawning outside their zone</b><p>A fallback returned unverified positions when raycasts missed. Now it returns nothing and retries, so trees only land on real ground.</p></div>
+      </div>
+      <div class="shots wide">
+        <figure class="wide"><img src="img/batc-world.webp" width="1600" height="888" loading="lazy" alt="Build a Tree Cutter world with a player's garden, shop and forest"><figcaption>The world: forest, shops, leaderboards and your own garden.</figcaption></figure>
+        <figure><img src="img/batc-build.webp" width="1600" height="877" loading="lazy" alt="Build mode with a parts inventory and a vehicle under construction"><figcaption>Build mode: every vehicle is made by the player.</figcaption></figure>
+        <figure><img src="img/batc-leaderboards.webp" width="990" height="495" loading="lazy" alt="In-game leaderboards for cash, trees cut and time played"><figcaption>Leaderboards for cash, trees cut and time played.</figcaption></figure>
+        <figure><img src="img/batc-studio.webp" width="1600" height="896" loading="lazy" alt="Roblox Studio with the game's ModuleScripts in the Explorer"><figcaption>Behind the scenes in Roblox Studio: separate modules for analytics, inventory, gardens, live flags and more.</figcaption></figure>
+      </div>
+    </article>
+    <article class="card feat">
+      <div>
+      <span class="tag">Past game · Roblox</span>
+      <div class="grp"><img class="logo" src="img/etfs-icon.webp" width="240" height="240" alt="Escape Tsunami for Sharks game icon: a player carrying a purple shark"><h3>Escape Tsunami for Sharks</h3></div>
+      <div class="row"><div><div class="big">387.8k</div><span class="tag">visits</span></div><div><div class="big">44.9k</div><span class="tag">favourites</span></div><div><div class="big">300+</div><span class="tag">concurrent players</span></div></div>
+            <div class="row"><div><div class="big">92nd</div><span class="tag">percentile Day 7 retention</span></div><div><div class="big">84th</div><span class="tag">percentile Day 1 retention</span></div></div>
+      <p class="tag">Compared with other Roblox simulation games, from Roblox's own benchmarks.</p>
+      <p>Run from the tsunamis, collect and upgrade sharks, and build up your base. Updates added new sharks, an Apex rarity and a secret cave area.</p>
+      <p class="tag">I've since taken this game down for personal reasons.</p>
+      </div>
+      <div class="shots">
+        <figure><img src="img/etfs-sharks.webp" width="1600" height="872" loading="lazy" alt="A base full of upgraded sharks in Escape Tsunami for Sharks"><figcaption>A player's shark base.</figcaption></figure>
+        <figure class="wide"><img src="img/etfs-benchmarks.webp" width="826" height="210" loading="lazy" alt="Roblox Creator Hub benchmarks: average playtime 13.5 min (63rd percentile), Day 1 retention 11.64% (84th), Day 7 retention 2.66% (92nd), payer conversion 0.46% (58th)"><figcaption>Creator Hub benchmarks against simulation games (7-day averages, week of Mar 25–31).</figcaption></figure>
+        <figure><img src="img/etfs-wide.webp" width="1600" height="872" loading="lazy" alt="The main lane of Escape Tsunami for Sharks"><figcaption>The main lane, with VIP zones and events.</figcaption></figure>
+      </div>
+    </article>
+    <article class="card">
+      <span class="tag">Roblox game · Scribbles Studios</span>
+      <div class="grp"><img class="logo" src="img/etrg-icon.webp" width="200" height="200" alt="Escape Tsunami for Roblox Games game icon"><h3>Escape Tsunami for Roblox Games</h3></div>
+      <div class="row"><div><div class="big">558k+</div><span class="tag">visits</span></div><div><div class="big">57k</div><span class="tag">favourites</span></div><div><div class="big">70</div><span class="tag">peak concurrent</span></div></div>
+      <p>My most-visited game so far.</p>
+    </article>
+    <article class="card">
+      <span class="tag">Roblox group · Founder and owner</span>
+      <div class="grp"><img class="logo" src="img/scribbles.webp" width="150" height="150" alt="Scribbles Studios logo"><div><h3>Scribbles Studios</h3><div class="big">110k+</div><span class="tag">members</span></div></div>
+      <p>The studio behind Build a Tree Cutter, Escape Tsunami for Sharks and Escape Tsunami for Roblox Games. I own and run it myself.</p>
+      <p><a class="play" href="https://www.roblox.com/communities/32792866/Scribbles-Studios#!/about">Visit the group</a></p>
+      <figure class="shotone"><img src="img/scribbles-peak.webp" width="1060" height="604" loading="lazy" alt="Scribbles Studios games list: Jump for Sharks with 27 players, Escape Tsunami for Sharks with 259 and Escape Tsunami for Roblox Games with 70"><figcaption>The studio's games at peak: 356 players at once across Jump for Sharks, Escape Tsunami for Sharks and Escape Tsunami for Roblox Games.</figcaption></figure>
+    </article>
+    <article class="card">
+      <span class="tag">Roblox group · Founder and owner</span>
+      <div class="grp"><img class="logo" src="img/games-area.webp" width="400" height="400" alt="The Games Area logo"><div><h3>The Games Area</h3><div class="big">3</div><span class="tag">games · 111 members</span></div></div>
+      <p>Another group I own and run, home to 3 of my games.</p>
+      <figure class="shotone"><img src="img/games-area-games.webp" width="532" height="250" loading="lazy" alt="The Games Area experiences: INSANE Troll Tower, INSANE Marble Run and Disaster Troll Tower"><figcaption>INSANE Troll Tower, INSANE Marble Run and Disaster Troll Tower, rated 73–78% by players.</figcaption></figure>
+    </article>
+  </div>
+</div></section>
+
+<section class="band alt" id="devlogs"><div class="wrap">
+  <h2>Devlogs</h2>
+  <p class="sub">I document how my games get built, from systems design to bug hunts, on my YouTube channel.</p>
+  <div class="grid">
+    <article class="card">
+      <span class="tag">YouTube</span>
+      <div class="grp"><img class="logo" src="img/yt-pfp.webp" width="240" height="240" alt="@timedVector profile picture: a crowned lizard"><h3>@timedVector</h3></div>
+      <div class="row"><div><div class="big">1,300+</div><span class="tag">subscribers</span></div><div><div class="big">75k+</div><span class="tag">views</span></div></div>
+      <p>Planned, recorded and edited in DaVinci Resolve. My first devlog, about INSANE Troll Tower, got 46k+ views.</p>
+      <a href="https://www.youtube.com/@timedVector">Watch the channel</a>
+    </article>
+    <article class="card">
+      <span class="tag">YouTube · Earlier channel</span>
+      <div class="grp"><img class="logo" src="img/vectorrblx-pfp.webp" width="240" height="240" alt="VectorRBLX profile picture: a Roblox avatar in an orange jacket"><h3>VectorRBLX</h3></div>
+      <div class="row"><div><div class="big">13k</div><span class="tag">subscribers</span></div><div><div class="big">1M+</div><span class="tag">views</span></div></div>
+      <p>My earlier Roblox gaming channel, where I first learned how to grow an audience. The videos are now unlisted.</p>
+      <p><a href="https://www.youtube.com/@VectorRBLX">Visit the channel</a> · <a href="https://discord.gg/87nGECGmH">The channel's Discord community</a></p>
+    </article>
+  </div>
+</div></section>
+
+<section class="band" id="hardware"><div class="wrap">
+  <h2>Hardware</h2>
+  <div class="grid">
+    <article class="card">
+      <span class="tag">Prototype · ESP32</span>
+      <h3>Automated wall switch</h3>
+      <p>An ESP32 with a DS3231 real-time clock and an MG995 servo that physically flips an ordinary wall light switch on a timer, without rewiring anything.</p>
+    </article>
+  </div>
+</div></section>
+
+<section class="band" id="skills"><div class="wrap">
+  <h2>Skills and tools</h2>
+  <ul class="pills">
+    <li>Luau (OOP, ModuleScripts, CollectionService)</li><li>Client–server game architecture</li><li>Roblox Studio</li><li>Blender</li><li>Figma</li><li>DaVinci Resolve</li><li>Git and GitHub</li><li>ESP32</li><li>Claude Code + MCP</li>
+  </ul>
+  <p class="tag" style="margin:18px 0 8px">Also learning</p>
+  <ul class="pills learning">
+    <li>Python</li><li>JavaScript</li><li>HTML</li><li>CSS</li>
+  </ul>
+</div></section>
+
+<footer class="band" id="contact"><div class="wrap">
+  <div class="grp"><img class="logo" src="img/vector-logo.webp" width="240" height="240" alt=""><h2>Get in touch</h2></div>
+  <p>For business, collabs or questions, email me at <a href="mailto:timedvector@gmail.com"><b>timedvector@gmail.com</b></a>. You can also follow what I'm working on through my YouTube channel or dev Discord.</p>
+  <div class="btns"><a class="btn p" href="https://www.youtube.com/@timedVector">youtube.com/@timedVector</a><a class="btn" href="https://discord.gg/nPvG9XfaC">Join my dev Discord</a></div>
+</div></footer>
+
+
+<script>
+{
+  const G=[{"n": "Build a Tree Cutter", "i": "batc-icon", "s": "Live · launched Nov 2026", "st": [["Visits", "Growing"], ["Status", "Live now"]], "u": "https://www.roblox.com/games/92131967734544/Build-a-Tree-Cutter", "l": "This is where I levelled up. I learned to use AI as a real development tool, and to build high-level UI and strong server-side architecture: procedural tree generation with seeds, and server checks on everything.", "o": "live"}, {"n": "Escape Tsunami for Roblox Games", "i": "etrg-icon", "s": "Scribbles Studios", "st": [["Visits", "558k+"], ["Favourites", "57k"], ["Peak players", "70"]], "l": "Chasing trends gets you fast spikes and fast deaths. The bigger lesson was security: the server never checked item levelling, so exploiters used it for infinite cash and speed. Players told me it ruined the game, and they were right. Still a good hit, but weak server-side code killed it.", "o": "hit"}, {"n": "Escape Tsunami for Sharks", "i": "etfs-icon", "s": "My most successful game · taken down", "st": [["Visits", "387.8k"], ["Favourites", "44.9k"], ["Peak players", "300+"], ["Day 7 retention", "92nd pct"]], "l": "It used Hungry Shark World and Hungry Shark Evolution IP. I realised that was taking someone else's work and went against my morals, so I shut it down about a week after it took off. Never build on IP that isn't yours.", "o": "hit"}, {"n": "Jump for Sharks", "i": "jfs-icon", "s": "Scribbles Studios", "st": [["Visits", "14k"], ["Favourites", "1.8k"]], "l": "Escape Tsunami, but you upgrade your jump. I shut it down just as the algorithm was about to pick it up, for the same reason and with the same lesson as Escape Tsunami for Sharks: don't go against your ethics, and stay away from copyrighted IP.", "o": "cut"}, {"n": "Disaster Troll Tower", "i": "disaster-tower", "s": "The Games Area · Dec 2025", "st": [["Visits", "885"], ["Favourites", "107"]], "u": "https://www.roblox.com/games/90452020520294/Disaster-Troll-Tower", "l": "Troll Tower plus rotating disasters: meteor showers, tornadoes, blizzards and more. While testing I locked it to only the volcano, then published that version and bought one day of ads without checking. Now I test every version before publishing, and spread my ad budget over a week instead of going all in.", "o": "flop"}, {"n": "INSANE Marble Run", "i": "marble-run", "s": "The Games Area · Oct–Nov 2025", "st": [["Visits", "1.2k"], ["Favourites", "133"]], "u": "https://www.roblox.com/games/97376945683863/INSANE-MARBLE-RUN", "l": "Fun on PC, but on mobile the controls were sloppy and made a hard game much harder. Mobile players are most of Roblox, so I learned not to neglect them and to test properly on every device.", "o": "flop"}, {"n": "INSANE Troll Tower", "i": "troll-tower", "s": "The Games Area · Summer 2025", "st": [["Visits", "4.8k"], ["Favourites", "857"], ["Devlog views", "46k+"]], "u": "https://www.roblox.com/games/113775165043574/INSANE-Troll-Tower", "l": "The start of my real Roblox Studio career. I learned to use AI, run ads, make game graphics and design UI in Figma. Its devlog was my first @timedVector video and got 46k+ views, which kicked off the channel.", "o": "flop"}, {"n": "The Truth Machine", "i": "truth-machine", "s": "Apr 2023", "st": [["Visits", "35"]], "l": "A game where you can't move: it's all UI. A developer friend wrote the scripts for my minigames, so I read his code and rebuilt his methods here. That's how I learned tweens and the way I still build UI today.", "o": "learn"}, {"n": "Vector's Minigames", "i": "minigames", "s": "Tournament hub for VectorRBLX · Feb 2023", "st": [["Visits", "723"], ["Modes", "Laser tag, obbies, hide and seek"]], "l": "I hosted live tournaments here for my old channel, with real Robux prizes for sword fights and Simon Says. It taught me to run live events and handle problems in real time, which I needed later when an admin abuse event for Escape Tsunami for Sharks went wrong because of bugs in a new update. I also learned to design settings and shop UI.", "o": "event"}, {"n": "Vector's Simon Says", "i": "simon-says", "s": "The first minigames hub · Oct 2022", "st": [["Visits", "3.4k"], ["Modes", "Simon Says, sword fights"]], "l": "The smaller version that came before Vector's Minigames: a small lobby, Simon Says and a sword fight arena, with no UI. This is where my live events started.", "o": "event"}, {"n": "Roblox Friend Hangout", "i": "friend-hangout", "s": "Sep 2020 · my very first game", "st": [["Built with", "Toolbox models"]], "l": "Me learning the basics of Roblox Studio with random toolbox models, Dominuses and cacti included. I even made a graphic for it, the same way I make thumbnails now.", "o": "learn"}];
+  const OC={live:['Live','#5fd16b'],hit:['Hit','#f2c14e'],cut:['Cut early','#ff9a3d'],flop:['Flop','#ff6b5e'],learn:['Learning project','#8fb3d9'],event:['Event hub','#c39bff']};
+  const stage=document.getElementById('stage'),ring=document.getElementById('ring'),panel=document.getElementById('panel');
+  const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const btns=G.map((g,k)=>{const b=document.createElement('button');b.className='gi';b.type='button';b.setAttribute('aria-label',g.n);b.innerHTML='<img src="img/'+g.i+'.webp" alt=""><span class="dot" style="background:'+OC[g.o][1]+'"></span>';b.setAttribute('aria-label',g.n+', '+OC[g.o][0]);b.addEventListener('click',()=>pick(k));stage.appendChild(b);return b});
+  let sel=0,ang=0,hover=false,last=0;
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function pick(k){
+    sel=k;btns.forEach((b,j)=>b.classList.toggle('on',j===k));
+    const g=G[k];
+    panel.innerHTML='<div class="ph"><img src="img/'+g.i+'.webp" alt=""><div><span class="badge" style="--c:'+OC[g.o][1]+'">'+OC[g.o][0]+'</span><h3>'+esc(g.n)+'</h3><span class="status">'+esc(g.s)+'</span></div></div>'+
+      '<div class="pstats">'+g.st.map(s=>'<div><strong>'+esc(s[1])+'</strong>'+esc(s[0])+'</div>').join('')+'</div>'+
+      '<div class="lesson"><b>What I learned</b><p>'+(g.l?esc(g.l):'Lesson coming soon.')+'</p></div>'+(g.u?'<p><a class="play" href="'+esc(g.u)+'">Play on Roblox</a></p>':'');
+  }
+  function place(){
+    const W=stage.clientWidth,H=stage.clientHeight,sz=btns[0].offsetWidth;
+    const rx=Math.min(W/2-sz/2-6,290),ry=rx*0.45;
+    ring.style.width=rx*2+'px';ring.style.height=ry*2+'px';
+    btns.forEach((b,k)=>{
+      const a=ang+k*2*Math.PI/G.length,x=Math.cos(a)*rx,y=Math.sin(a)*ry,d=(Math.sin(a)+1)/2;
+      const sc=0.7+0.45*d;
+      b.style.transform='translate('+(W/2+x-sz/2)+'px,'+(H/2+y-sz/2)+'px) scale('+sc.toFixed(3)+')';
+      b.style.zIndex=Math.round(d*100);b.style.opacity=(0.55+0.45*d).toFixed(2);
+    });
+  }
+  function tick(t){
+    if(last&&!hover)ang+=(t-last)*0.00025;
+    last=t;place();requestAnimationFrame(tick);
+  }
+  stage.addEventListener('pointerenter',()=>hover=true);
+  stage.addEventListener('pointerleave',()=>hover=false);
+  stage.addEventListener('focusin',()=>hover=true);
+  stage.addEventListener('focusout',()=>hover=false);
+  const ro=new ResizeObserver(place);ro.observe(stage);
+  pick(0);place();
+  if(!reduce)requestAnimationFrame(tick);
+}
+</script>
+</body>
+</html>
