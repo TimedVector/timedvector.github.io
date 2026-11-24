@@ -49,6 +49,8 @@ h3{font-size:22px;line-height:1.2;margin:0 0 6px;font-weight:700}
 .shots figure{margin:0}.shots img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)}
 .shots figcaption{font-size:14px;color:var(--soft);margin-top:6px}
 .shots .wide{grid-column:1/-1}
+.feat>.shots.wide{grid-column:1/-1;grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:700px){.feat>.shots.wide{grid-template-columns:minmax(0,1fr)}}
 .logo{width:72px;height:72px;border-radius:14px;object-fit:cover;border:1px solid var(--line)}
 .grp{display:flex;gap:16px;align-items:center}
 .play{display:inline-flex;align-items:center;min-height:46px;padding:0 20px;border-radius:10px;background:var(--red);color:#fff;font-weight:700;text-decoration:none}.play:focus-visible{outline:3px solid var(--saw);outline-offset:3px}
